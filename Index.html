@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Officerave.exe — Bureau</title>
+<style>
+:root{--gray:#c0c0c0;--navy:#000080;--teal:#008080;--black:#000;--white:#fff}
+*{box-sizing:border-box}html,body{height:100%;margin:0;font-family:Tahoma,Arial,sans-serif;font-size:13px;color:#111}
+body{overflow:hidden;background:var(--teal);user-select:none}
+.desktop{position:relative;height:100dvh;min-height:420px;background:#008080;overflow:hidden;padding:12px}
+.icon-grid{display:flex;flex-direction:column;align-items:flex-start;gap:18px;width:92px}
+.desktop-icon{width:82px;min-height:76px;padding:4px 2px;border:1px solid transparent;background:transparent;color:white;text-shadow:1px 1px #000;text-align:center;cursor:default;display:flex;flex-direction:column;align-items:center;gap:6px}
+.desktop-icon:focus,.desktop-icon.selected{outline:1px dotted white;background:rgba(0,0,128,.35)}
+.glyph{font-size:34px;line-height:38px;filter:drop-shadow(1px 1px #333)}
+.window{position:absolute;left:50%;top:50%;transform:translate(-50%,-53%);width:min(740px,calc(100vw - 38px));height:min(650px,calc(100dvh - 72px));min-height:300px;background:var(--gray);border:2px solid;border-color:#fff #404040 #404040 #fff;box-shadow:1px 1px 0 #000;display:none;flex-direction:column;padding:3px;resize:both;overflow:hidden}
+.window.open{display:flex}.titlebar{height:25px;flex:0 0 25px;background:var(--navy);color:white;font-weight:bold;display:flex;align-items:center;justify-content:space-between;padding:2px 3px 2px 6px;cursor:move}.title-left{display:flex;gap:6px;align-items:center}.mini-icon{font-size:16px}.window-controls{display:flex;gap:3px}.winbtn{width:20px;height:18px;padding:0;line-height:14px;font-weight:bold;background:var(--gray);border:2px solid;border-color:white #404040 #404040 white;cursor:pointer}
+.menu-bar{height:25px;display:flex;align-items:center;gap:18px;padding:3px 7px;border-bottom:1px solid #888}.menu-bar span:first-letter{text-decoration:underline}
+.content{min-height:0;flex:1;overflow:auto;padding:14px;background:#c0c0c0}.intro{display:flex;gap:14px;align-items:center;margin-bottom:14px}.big-icon{font-size:45px}.intro h1{font-size:18px;margin:0 0 5px}.intro p{margin:0;line-height:1.5}.panel{border:2px solid;border-color:#808080 white white #808080;padding:12px;margin:12px 0}.panel legend{padding:0 5px}.row{display:flex;gap:12px;align-items:center}.button{font:13px Tahoma,Arial,sans-serif;background:var(--gray);padding:7px 16px;min-width:88px;border:2px solid;border-color:white #404040 #404040 white;cursor:pointer}.button:active{border-color:#404040 white white #404040;padding:8px 15px 6px 17px}.button:focus{outline:1px dotted #000;outline-offset:-5px}.actions{display:flex;justify-content:flex-end;gap:8px;padding:10px 3px 4px}.small{font-size:11px;color:#333}.form-frame{width:100%;height:100%;min-height:430px;border:2px inset #fff;background:white}.form-content{padding:0;overflow:hidden;display:flex;flex-direction:column}.form-content iframe{border:0;display:block;width:100%;height:100%;min-height:440px;background:#fff}.statusbar{height:22px;flex:0 0 22px;border-top:1px solid #808080;display:flex;align-items:center;padding:2px 6px;gap:6px}.status-cell{border:1px solid;border-color:#808080 white white #808080;padding:2px 6px;flex:1}.taskbar{position:absolute;bottom:0;left:0;right:0;height:40px;background:var(--gray);border-top:2px solid white;display:flex;align-items:center;padding:3px;gap:5px;z-index:20}.start{height:30px;display:flex;align-items:center;gap:6px;font-weight:bold;padding:3px 9px}.windows-logo{font-size:20px}.task{height:29px;min-width:160px;max-width:240px;text-align:left;padding:4px 8px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.tray{margin-left:auto;border:1px inset white;padding:5px 9px;min-width:65px;text-align:center}.start-menu{display:none;position:absolute;left:3px;bottom:39px;width:230px;background:var(--gray);border:2px solid;border-color:white #404040 #404040 white;z-index:30;padding:4px;box-shadow:1px 1px #000}.start-menu.open{display:block}.start-banner{position:absolute;left:4px;top:4px;bottom:4px;width:31px;background:var(--navy);color:white;writing-mode:vertical-rl;transform:rotate(180deg);font-weight:bold;text-align:left;padding:8px 5px;font-size:17px;letter-spacing:1px}.start-items{margin-left:34px}.start-item{padding:10px 8px;display:flex;gap:10px;align-items:center;cursor:pointer}.start-item:hover{background:var(--navy);color:white}.divider{height:1px;background:#808080;border-bottom:1px solid white;margin:3px 0}.toast{position:absolute;right:18px;bottom:54px;max-width:320px;background:var(--gray);border:2px solid;border-color:white #404040 #404040 white;padding:12px;display:none;z-index:40}.toast.show{display:block}.toast strong{display:block;margin-bottom:6px}.toast button{margin-top:10px}
+@media(max-width:600px){.desktop{padding:6px}.icon-grid{gap:8px}.desktop-icon{width:74px}.window{width:calc(100vw - 16px);height:calc(100dvh - 62px);max-height:none;resize:none;top:48%;}.content{padding:10px}.intro{align-items:flex-start}.big-icon{font-size:36px}.intro h1{font-size:16px}.task{min-width:0;flex:1}.tray{min-width:58px;padding:5px}.taskbar{height:36px}.start{padding:3px 7px}.start-menu{bottom:35px}}
+</style>
+</head>
+<body>
+<main class="desktop" aria-label="Bureau Officerave">
+  <div class="icon-grid">
+    <button class="desktop-icon" id="computerIcon" aria-label="Ouvrir le questionnaire Officerave">
+      <span class="glyph">🖥️</span><span>Officerave.exe</span>
+    </button>
+    <button class="desktop-icon" id="readmeIcon" aria-label="Lire les informations">
+      <span class="glyph">📄</span><span>Lisez-moi.txt</span>
+    </button>
+    <button class="desktop-icon" id="recycleIcon" aria-label="Corbeille">
+      <span class="glyph">🗑️</span><span>Corbeille</span>
+    </button>
+  </div>
+
+  <section class="window" id="welcomeWindow" role="dialog" aria-label="Officerave.exe">
+    <div class="titlebar" data-drag="welcomeWindow"><div class="title-left"><span class="mini-icon">🖥️</span><span>Officerave.exe — Assistant de configuration</span></div><div class="window-controls"><button class="winbtn" data-minimize="welcomeWindow" aria-label="Réduire">_</button><button class="winbtn" data-close="welcomeWindow" aria-label="Fermer">×</button></div></div>
+    <div class="menu-bar"><span>Fichier</span><span>Édition</span><span>Affichage</span><span>Aide</span></div>
+    <div class="content">
+      <div class="intro"><div class="big-icon">💾</div><div><h1>Bienvenue dans Officerave</h1><p>Assistant de configuration des participants</p></div></div>
+      <p>Ce programme va recueillir les informations nécessaires à la préparation de l'événement.</p>
+      <fieldset class="panel"><legend>Avant de commencer</legend><p>⦿ Préparez quelques informations personnelles.</p><p>⦿ Répondez à toutes les questions demandées dans le formulaire.</p><p>⦿ Cliquez sur <b>Suivant</b> pour ouvrir le questionnaire officiel.</p></fieldset>
+      <p class="small">Aucune installation n'est nécessaire. Ce programme fonctionne directement dans votre navigateur.</p>
+      <div class="actions"><button class="button" id="cancelWelcome">Annuler</button><button class="button" id="startForm">Suivant &gt;</button></div>
+    </div>
+    <div class="statusbar"><div class="status-cell">Prêt</div><span>Officerave 98</span></div>
+  </section>
+
+  <section class="window" id="formWindow" role="dialog" aria-label="Questionnaire invités">
+    <div class="titlebar" data-drag="formWindow"><div class="title-left"><span class="mini-icon">📝</span><span>Questionnaire invités — Google Forms</span></div><div class="window-controls"><button class="winbtn" data-minimize="formWindow" aria-label="Réduire">_</button><button class="winbtn" data-close="formWindow" aria-label="Fermer">×</button></div></div>
+    <div class="menu-bar"><span>Fichier</span><span>Édition</span><span>Affichage</span><span>Aide</span></div>
+    <div class="content form-content"><iframe title="Questionnaire Officerave" src="https://docs.google.com/forms/d/e/1FAIpQLScUz4wGgTtaQsCWlZu2JrM8sPHwIS7yaziOOGxhqXln52x8-A/viewform?embedded=true" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+    <div class="statusbar"><div class="status-cell">Formulaire en ligne</div><span>Connexion requise</span></div>
+  </section>
+
+  <section class="window" id="readmeWindow" role="dialog" aria-label="Lisez-moi">
+    <div class="titlebar" data-drag="readmeWindow"><div class="title-left"><span class="mini-icon">📄</span><span>Lisez-moi.txt — Bloc-notes</span></div><div class="window-controls"><button class="winbtn" data-close="readmeWindow" aria-label="Fermer">×</button></div></div>
+    <div class="content"><h2>OFFICERAVE.EXE</h2><p>Bienvenue, utilisateur.</p><p>Veuillez remplir le questionnaire pour aider l'équipe d'organisation à préparer l'événement.</p><p>Conseil système : toute tentative de danser sur le bureau est tolérée.</p><div class="actions"><button class="button" data-close="readmeWindow">OK</button></div></div>
+    <div class="statusbar"><div class="status-cell">Ln 1, Col 1</div></div>
+  </section>
+
+  <div class="start-menu" id="startMenu"><div class="start-banner">Windows 98</div><div class="start-items"><div class="start-item" id="startOfficerave"><span>🖥️</span><span>Officerave.exe</span></div><div class="start-item" id="startReadme"><span>📄</span><span>Lisez-moi.txt</span></div><div class="divider"></div><div class="start-item" id="startShutdown"><span>🔌</span><span>Arrêter...</span></div></div></div>
+  <div class="toast" id="toast"><strong id="toastTitle">Windows 98</strong><span id="toastText"></span><br><button class="button" id="toastOk">OK</button></div>
+  <footer class="taskbar"><button class="button start" id="startButton"><span class="windows-logo">🪟</span> Démarrer</button><button class="button task" id="taskWelcome" hidden>Officerave.exe</button><button class="button task" id="taskForm" hidden>Questionnaire invités</button><div class="tray" id="clock">10:00</div></footer>
+</main>
+<script>
+const $=id=>document.getElementById(id);let activeWindow=null;
+function openWindow(id){const el=$(id);el.classList.add('open');activeWindow=id;if(id==='welcomeWindow')$('taskWelcome').hidden=false;if(id==='formWindow')$('taskForm').hidden=false;$(id).style.zIndex=String(10+Date.now()%1000);$('startMenu').classList.remove('open')}
+function closeWindow(id){$(id).classList.remove('open');if(id==='welcomeWindow')$('taskWelcome').hidden=true;if(id==='formWindow')$('taskForm').hidden=true;if(activeWindow===id)activeWindow=null}
+function minimizeWindow(id){$(id).classList.remove('open');activeWindow=null}
+$('computerIcon').addEventListener('dblclick',()=>openWindow('welcomeWindow'));$('computerIcon').addEventListener('click',e=>{document.querySelectorAll('.desktop-icon').forEach(x=>x.classList.remove('selected'));e.currentTarget.classList.add('selected')});$('computerIcon').addEventListener('keydown',e=>{if(e.key==='Enter')openWindow('welcomeWindow')});
+$('readmeIcon').addEventListener('dblclick',()=>openWindow('readmeWindow'));$('readmeIcon').addEventListener('click',e=>{document.querySelectorAll('.desktop-icon').forEach(x=>x.classList.remove('selected'));e.currentTarget.classList.add('selected')});
+$('recycleIcon').addEventListener('dblclick',()=>showToast('Corbeille','La corbeille est vide. Comme votre agenda après la soirée.'));
+$('startForm').addEventListener('click',()=>{closeWindow('welcomeWindow');openWindow('formWindow')});$('cancelWelcome').addEventListener('click',()=>closeWindow('welcomeWindow'));
+document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',()=>closeWindow(b.dataset.close)));document.querySelectorAll('[data-minimize]').forEach(b=>b.addEventListener('click',()=>minimizeWindow(b.dataset.minimize)));
+$('startButton').addEventListener('click',()=>$('startMenu').classList.toggle('open'));$('startOfficerave').addEventListener('click',()=>openWindow('welcomeWindow'));$('startReadme').addEventListener('click',()=>openWindow('readmeWindow'));$('startShutdown').addEventListener('click',()=>showToast('Arrêter le système','Vous ne pouvez pas éteindre Internet. Fermez simplement cet onglet.'));
+$('taskWelcome').addEventListener('click',()=>{if($('welcomeWindow').classList.contains('open'))minimizeWindow('welcomeWindow');else openWindow('welcomeWindow')});$('taskForm').addEventListener('click',()=>{if($('formWindow').classList.contains('open'))minimizeWindow('formWindow');else openWindow('formWindow')});
+function showToast(title,txt){$('toastTitle').textContent=title;$('toastText').textContent=txt;$('toast').classList.add('show')}$('toastOk').addEventListener('click',()=>$('toast').classList.remove('show'));
+function updateClock(){const d=new Date();$('clock').textContent=d.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})}updateClock();setInterval(updateClock,15000);
+// Make windows draggable by their title bars on pointer devices.
+document.querySelectorAll('[data-drag]').forEach(bar=>{bar.addEventListener('pointerdown',e=>{if(e.target.closest('button'))return;const win=$(bar.dataset.drag);const rect=win.getBoundingClientRect();win.style.transform='none';win.style.left=rect.left+'px';win.style.top=rect.top+'px';const sx=e.clientX,sy=e.clientY,l=rect.left,t=rect.top;bar.setPointerCapture(e.pointerId);function move(ev){win.style.left=Math.max(0,Math.min(innerWidth-win.offsetWidth,l+ev.clientX-sx))+'px';win.style.top=Math.max(0,Math.min(innerHeight-45-win.offsetHeight,t+ev.clientY-sy))+'px'}function up(){bar.removeEventListener('pointermove',move);bar.removeEventListener('pointerup',up)}bar.addEventListener('pointermove',move);bar.addEventListener('pointerup',up,{once:true})})});
+// Open welcome window after first interaction rather than surprising the visitor with a popup.
+</script>
+</body>
+</html>
